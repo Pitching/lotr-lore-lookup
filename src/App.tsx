@@ -5,14 +5,12 @@ function App() {
 
   return (
     <>
-    <div className="App">
       <header>
-        this is the header
+        <h1>Lord of the Lore</h1>
       </header>
       <main>
         <Dashboard />
       </main>
-    </div>
     </>
   )
 }
