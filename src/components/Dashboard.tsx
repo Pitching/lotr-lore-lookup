@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import useFetchData from '@/hooks/useFetchData'
+import useFetchData, { Data } from '@/hooks/useFetchData'
 import './Dashboard.css'
+import Book from './Book'
 
 function Dashboard() {
   const [selection, setSelection] = useState('')
@@ -12,6 +13,10 @@ function Dashboard() {
     'Movies',
     'Characters',
   ]
+
+  const handleBookClick = (bookName: string) => {
+    console.log(`Book clicked: ${bookName}`)
+  }
 
   return (
     <>
@@ -26,6 +31,17 @@ function Dashboard() {
         <h1>{selection}</h1>
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error}</p>}
+        {selection === 'Books' && (
+          <div className="books-container">
+            {data.map((book: Data) => (
+              <Book
+                key={book._id}
+                title={book.name}
+                onClick={() => handleBookClick(book.name)}
+                />
+            ))}
+          </div>
+        )}
         {selection && (
           <ul>
             {data.map(data => (
