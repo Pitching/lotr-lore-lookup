@@ -17,31 +17,53 @@ function useFetchData(selection: string) {
       if (!selection) {
         return
       }
-      if (selection === 'Books') {
-        setLoading(true)
-        setError(null)
-        try {
-          const res = await fetch(url + 'book', {
-            headers: {
-              'Authorization': `Bearer ${process.env.REACT_APP_API_KEY}`
-            }
-          })
-          const data = await res.json()
-          setData(data.docs)
-        } catch (err) {
-          if (err instanceof Error) {
-            setError(err.message)
-          } else {
-            setError('An unknown error occurred')
-          }
-        } finally {
-          setLoading(false)
+      setLoading(true)
+      setError(null)
+      try {
+        let endpoint = ''
+        switch (selection) {
+          case 'Books':
+            endpoint = 'book'
+            break
+          case 'Movies':
+            endpoint = 'movie'
+            break
+          case 'Characters':
+            endpoint = 'character'
+            break
+          case 'Quotes':
+            endpoint = 'quote'
+            break
+          default:
+            throw new Error('Invalid selection')
         }
+
+        const res = await fetch(url + endpoint, {
+          headers: {
+            'Authorization': `Bearer ${import.meta.env.VITE_API_KEY}`
+          }
+        })
+
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`)
+        }
+
+        const data = await res.json()
+        setData(data.docs)
+      } catch (err) {
+        if (err instanceof Error) {
+          setError(err.message)
+        } else {
+          setError('An unknown error occurred')
+        }
+      } finally {
+        setLoading(false)
       }
     }
     fetchData()
   }, [selection])
-  return {data, error, loading}
+  
+  return { data, error, loading }
 }
 
 export default useFetchData
