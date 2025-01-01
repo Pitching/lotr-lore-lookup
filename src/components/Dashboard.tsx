@@ -11,7 +11,6 @@ function Dashboard() {
     'Books',
     'Movies',
     'Characters',
-    'Quotes',
   ]
 
   return (
@@ -27,7 +26,7 @@ function Dashboard() {
         <h1>{selection}</h1>
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error}</p>}
-        {selection === 'Books' && (
+        {selection && (
           <ul>
             {data.map(data => (
               <li key={data._id}>{data.name}</li>

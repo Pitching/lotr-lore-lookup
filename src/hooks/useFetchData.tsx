@@ -31,13 +31,9 @@ function useFetchData(selection: string) {
           case 'Characters':
             endpoint = 'character'
             break
-          case 'Quotes':
-            endpoint = 'quote'
-            break
           default:
             throw new Error('Invalid selection')
         }
-
         const res = await fetch(url + endpoint, {
           headers: {
             'Authorization': `Bearer ${import.meta.env.VITE_API_KEY}`
