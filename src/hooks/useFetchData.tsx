@@ -1,15 +1,16 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 
-interface Data {
+export interface Data {
   _id: string
   name: string
 }
 
-function useFetchData(selection: string) {
-  const [data, setData] = useState<Data[]>([])
-  const [error, setError] = useState<string | null>(null)
-  const [loading, setLoading] = useState(false)
-  
+function useFetchData(
+  selection: string,
+  setData: (data: Data[]) => void,
+  setLoading: (loading: boolean) => void,
+  setError: (error: string | null) => void
+) {
   const url = 'https://the-one-api.dev/v2/'
 
   useEffect(() => {
@@ -30,6 +31,9 @@ function useFetchData(selection: string) {
             break
           case 'Characters':
             endpoint = 'character'
+            break
+          case 'Quotes':
+            endpoint = 'quote'
             break
           default:
             throw new Error('Invalid selection')
@@ -57,9 +61,7 @@ function useFetchData(selection: string) {
       }
     }
     fetchData()
-  }, [selection])
-  
-  return { data, error, loading }
+  }, [selection, setData, setLoading, setError])
 }
 
 export default useFetchData

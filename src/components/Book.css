@@ -1,0 +1,16 @@
+.book {
+  cursor: pointer;
+  text-align: center;
+  margin: 20px;
+}
+
+.book img {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.book p {
+  margin-top: 5px;
+  font-size: 14px;
+}

@@ -1,18 +1,28 @@
 import { useState } from 'react'
 import useFetchData, { Data } from '@/hooks/useFetchData'
-import './Dashboard.css'
 import Book from './Book'
+import './Dashboard.css'
 
 function Dashboard() {
   const [selection, setSelection] = useState('')
-
-  const {data, loading, error} = useFetchData(selection)
+  const [data, setData] = useState<Data[]>([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const categories = [
     'Books',
     'Movies',
     'Characters',
   ]
+
+  const handleCategoryClick = (category: string) => {
+    setSelection(category)
+    setData([]) // Clear the current data
+    setLoading(true)
+    setError(null)
+  }
+
+  useFetchData(selection, setData, setLoading, setError)
 
   const handleBookClick = (bookName: string) => {
     console.log(`Book clicked: ${bookName}`)
@@ -24,7 +34,7 @@ function Dashboard() {
         <ul className="categoryList">
           {categories.map((category, index) => (
             <li key={index}>
-              <button onClick={() => setSelection(category)}>{category}</button>
+              <button onClick={() => handleCategoryClick(category)}>{category}</button>
             </li>
           ))}
         </ul>
@@ -38,14 +48,14 @@ function Dashboard() {
                 key={book._id}
                 title={book.name}
                 onClick={() => handleBookClick(book.name)}
-                />
+              />
             ))}
           </div>
         )}
         {selection && selection !== 'Books' && (
           <ul>
-            {data.map(data => (
-              <li key={data._id}>{data.name}</li>
+            {data.map((item: Data) => (
+              <li key={item._id}>{item.name}</li>
             ))}
           </ul>
         )}

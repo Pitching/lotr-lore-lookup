@@ -1,17 +1,25 @@
 .categoryContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  text-align: center;
 }
 
 .categoryList {
-  display: flex;
-  justify-content: space-around;
   list-style-type: none;
   padding: 0;
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
 .categoryList li {
   margin: 0 10px;
+}
+
+.books-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.book {
+  margin: 10px;
 }
