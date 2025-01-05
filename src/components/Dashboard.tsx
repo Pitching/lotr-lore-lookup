@@ -42,7 +42,7 @@ function Dashboard() {
             ))}
           </div>
         )}
-        {selection && (
+        {selection && selection !== 'Books' && (
           <ul>
             {data.map(data => (
               <li key={data._id}>{data.name}</li>
