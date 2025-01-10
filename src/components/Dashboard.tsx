@@ -28,6 +28,14 @@ function Dashboard() {
     console.log(`Book clicked: ${bookName}`)
   }
 
+  const handleMovieClick = (movieName: string) => {
+    console.log(`Movie clicked: ${movieName}`)
+  }
+
+  const handleCharacterClick = (characterName: string) => {
+    console.log(`Character clicked: ${characterName}`)
+  }
+
   return (
     <>
       <div className="categoryContainer">
@@ -52,12 +60,23 @@ function Dashboard() {
             ))}
           </div>
         )}
-        {selection && selection !== 'Books' && (
-          <ul>
-            {data.map((item: Data) => (
-              <li key={item._id}>{item.name}</li>
+        {selection === 'Movies' && (
+          <div className="movies-container">
+            {data.map((movie: Data) => (
+              <button key={movie._id} onClick={() => handleMovieClick(movie.name)}>
+                {movie.name}
+              </button>
             ))}
-          </ul>
+          </div>
+        )}
+        {selection === 'Characters' && (
+          <div className="characters-container">
+            {data.map((character: Data) => (
+              <button key={character._id} onClick={() => handleCharacterClick(character.name)}>
+                {character.name}
+              </button>
+            ))}
+          </div>
         )}
       </div>
     </>

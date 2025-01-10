@@ -14,12 +14,36 @@
   margin: 0 10px;
 }
 
-.books-container {
+.books-container,
+.movies-container,
+.characters-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  width: 100%;
 }
 
 .book {
   margin: 10px;
+}
+
+.movies-container button,
+.characters-container button {
+  background-color: transparent;
+  border: 2px solid rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  margin: 5px 10px;
+  font-size: 16px;
+  flex-grow: 1;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  text-decoration: none; /* Ensure no underline */
+}
+
+.movies-container button:hover,
+.characters-container button:hover {
+  background-color: rgb(255, 0, 0);
+  color: white;
 }
